@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truth Tap</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f5f5f5;
+        }
+        header {
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        .mypage-link {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1rem;
+            color: #007bff;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .mypage-link:hover {
+            color: #0056b3;
+        }
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .input-section, .score-section {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            font-size: 1rem;
+            padding: 10px;
+            width: 80%;
+            max-width: 600px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            font-size: 1rem;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .score {
+            font-size: 1.5rem;
+            margin-top: 20px;
+        }
+        .summary, .recommendation {
+            display: inline-block;
+            padding: 10px 15px;
+            color: #555; /* 진한 회색 */
+            cursor: pointer;
+            text-align: center;
+            font-size: 1rem;
+            margin: 10px;
+            text-decoration: underline;
+        }
+        .summary:hover, .recommendation:hover {
+            color: #333;
+        }
+        .summary {
+            text-align: left;
+        }
+        .recommendation {
+            text-align: right;
+            float: right; /* 오른쪽 배치 */
+        }
+        .summary-content {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: white;
+            max-height: 150px;
+            overflow-y: auto;
+            width: 80%; /* 중간까지 차지하는 폭 */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Truth Tap</h1>
+        <div class="mypage-link" onclick="location.href='mypage.html'">마이페이지</div>
+    </header>
+    <main>
+        <div class="input-section">
+            <input type="text" id="urlInput" placeholder="Enter article URL here">
+            <button onclick="checkCredibility()">Check Credibility</button>
+        </div>
+        <div class="score-section">
+            <div id="credibilityScore" class="score">Credibility Score: 0%</div>
+        </div>
+        <div class="summary" onclick="toggleSummary()">요약 내용 보기 ▼</div>
+        <div class="summary-content" id="summaryContent">
+            <p>요약된 기사 내용이 여기에 표시됩니다...</p>
+        </div>
+        <!-- 수정된 부분: 새 탭으로 열리게 변경 -->
+        <div class="recommendation" onclick="window.open('detect-recommend.html', '_blank')">추천기사 보러가기</div>
+    </main>
+
+    <script>
+        function checkCredibility() {
+            const credibilityScore = Math.floor(Math.random() * 101);
+            const scoreElement = document.getElementById('credibilityScore');
+            scoreElement.innerText = `Credibility Score: ${credibilityScore}%`;
+
+            // Change color based on score
+            if (credibilityScore > 70) {
+                scoreElement.style.color = 'green';
+            } else if (credibilityScore > 40) {
+                scoreElement.style.color = 'orange';
+            } else {
+                scoreElement.style.color = 'red';
+            }
+        }
+
+        function toggleSummary() {
+            const content = document.getElementById('summaryContent');
+            content.style.display = content.style.display === "none" || content.style.display === "" ? "block" : "none";
+            const summaryText = document.querySelector('.summary');
+            summaryText.innerText = content.style.display === "block" ? "요약 내용 숨기기 ▲" : "요약 내용 보기 ▼";
+        }
+    </script>
+</body>
+</html>
