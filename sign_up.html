@@ -38,49 +38,50 @@
         </div>
         <div class="right">
             <h2>관심분야 선택</h2>
-<button class="dropdown-button" onclick="toggleDropdown()">항목을 선택하세요</button>
-<div class="dropdown-content" id="dropdownContent">
-    <div class="checkbox-group">
-        <label for="politics">
-            <input type="checkbox" id="politics" name="interests" value="Politics">
-            정치
-        </label><br>
-        <label for="economy">
-            <input type="checkbox" id="economy" name="interests" value="Economy">
-            경제
-        </label><br>
-        <label for="culture">
-            <input type="checkbox" id="culture" name="interests" value="Culture">
-            생활/문화
-        </label><br>
-        <label for="world">
-            <input type="checkbox" id="world" name="interests" value="World">
-            세계
-        </label><br>
-        <label for="society">
-            <input type="checkbox" id="society" name="interests" value="Society">
-            사회
-        </label><br>
-        <label for="it">
-            <input type="checkbox" id="it" name="interests" value="IT">
-            IT/과학
-        </label><br>
-        <label for="sports">
-            <input type="checkbox" id="sports" name="interests" value="Sports">
-            스포츠
-        </label><br>
-        <label for="entertainment">
-            <input type="checkbox" id="entertainment" name="interests" value="Entertainment">
-            연예
-        </label><br>
-        <label for="environment">
-            <input type="checkbox" id="environment" name="interests" value="Environment">
-            환경
-        </label>
-    </div>
-</div>
+            <button class="dropdown-button" onclick="toggleDropdown()">항목을 선택하세요</button>
+            <div class="dropdown-content" id="dropdownContent">
+                <div class="checkbox-group">
+                    <label for="politics">
+                        <input type="checkbox" id="politics" name="interests" value="Politics">
+                        정치
+                    </label><br>
+                    <label for="economy">
+                        <input type="checkbox" id="economy" name="interests" value="Economy">
+                        경제
+                    </label><br>
+                    <label for="culture">
+                        <input type="checkbox" id="culture" name="interests" value="Culture">
+                        생활/문화
+                    </label><br>
+                    <label for="world">
+                        <input type="checkbox" id="world" name="interests" value="World">
+                        세계
+                    </label><br>
+                    <label for="society">
+                        <input type="checkbox" id="society" name="interests" value="Society">
+                        사회
+                    </label><br>
+                    <label for="it">
+                        <input type="checkbox" id="it" name="interests" value="IT">
+                        IT/과학
+                    </label><br>
+                    <label for="sports">
+                        <input type="checkbox" id="sports" name="interests" value="Sports">
+                        스포츠
+                    </label><br>
+                    <label for="entertainment">
+                        <input type="checkbox" id="entertainment" name="interests" value="Entertainment">
+                        연예
+                    </label><br>
+                    <label for="environment">
+                        <input type="checkbox" id="environment" name="interests" value="Environment">
+                        환경
+                    </label>
+                </div>
+            </div>
         </div>
-        <button class="signup-button" id="signupButton">회원가입하기</button>
+        <!-- 로그인 페이지로 이동 -->
+        <a href="login.html" class="signup-button">회원가입하기</a>
     </div>
 
     <script>
@@ -89,45 +90,6 @@
             const dropdownContent = document.getElementById("dropdownContent");
             dropdownContent.classList.toggle("show");
         }
-
-        // 회원가입 폼 데이터 전송 (JavaScript -> 백엔드 연결)
-        document.getElementById("signupButton").addEventListener("click", function (e) {
-            e.preventDefault(); // 기본 동작 방지
-            const formData = new FormData();
-
-            // 입력된 데이터 수집
-            formData.append("name", document.getElementById("name").value);
-            formData.append("birthdate", document.getElementById("birthdate").value);
-            formData.append("gender", document.querySelector('input[name="gender"]:checked')?.value || "");
-            formData.append("username", document.getElementById("username").value);
-            formData.append("password", document.getElementById("password").value);
-
-            // 관심분야 체크된 항목 추가
-            document.querySelectorAll('input[name="interests"]:checked').forEach(function (checkbox) {
-                formData.append("interests", checkbox.value);
-            });
-
-            // 서버로 데이터 전송
-            fetch("{% url 'signup' %}", {
-                method: "POST",
-                body: formData,
-                headers: {
-                    "X-CSRFToken": "{{ csrf_token }}", // CSRF 토큰 추가
-                },
-            })
-                .then((response) => {
-                    if (response.ok) {
-                        alert("회원가입 성공!");
-                        window.location.href = "detect-login.html"; // 성공 시 리다이렉트
-                    } else {
-                        alert("회원가입 실패: 다시 시도해주세요.");
-                    }
-                })
-                .catch((error) => {
-                    console.error("에러 발생:", error);
-                    alert("회원가입 중 문제가 발생했습니다.");
-                });
-        });
     </script>
 </body>
 </html>

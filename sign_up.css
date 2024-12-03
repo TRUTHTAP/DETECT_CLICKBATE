@@ -123,8 +123,9 @@ input[type="text"], input[type="date"], input[type="password"] {
     border-radius: 4px;
     cursor: pointer;
     font-size: 0.9em;
+    text-decoration: none;
 }
 
 .signup-button:hover {
-    background-color: #218838;
+    background-color: #17528d;
 }
