@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>개인정보 관리</title>
+    <title>개인정보 수정</title>
     <style>
         /* 기본 스타일 */
         * {
@@ -69,7 +69,7 @@
         }
 
         .header button {
-            background-color: #7aa4d0;
+            background-color: #4caf50;
             color: white;
             border: none;
             border-radius: 5px;
@@ -79,7 +79,7 @@
         }
 
         .header button:hover {
-            background-color: #4b81ba;
+            background-color: #388e3c;
         }
 
         /* 정보 그리드 */
@@ -101,6 +101,12 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .info-box:hover {
+            background-color: #e3eaf6;
         }
 
         .info-box label {
@@ -109,10 +115,44 @@
             margin-bottom: 10px;
         }
 
+        .info-box input {
+            font-size: 0.9rem;
+            color: #333;
+            border: none;
+            outline: none;
+            width: 100%;
+            text-align: center;
+            background: transparent;
+            display: none; /* 초기에는 보이지 않음 */
+        }
+
+        .info-box select {
+            font-size: 0.9rem;
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px;
+            width: 100%;
+            text-align: center;
+            display: none; /* 초기에는 보이지 않음 */
+        }
+
         .info-box span {
             font-size: 0.9rem;
             color: #333;
             font-weight: bold;
+        }
+
+        .info-box.editable input {
+            display: block; /* 수정 시 input 표시 */
+        }
+
+        .info-box.editable select {
+            display: block; /* 수정 시 select 표시 */
+        }
+
+        .info-box.editable span {
+            display: none; /* 수정 시 span 숨김 */
         }
 
         /* 푸터 */
@@ -144,42 +184,78 @@
     <div class="container">
         <!-- 헤더 -->
         <div class="header">
-            <h1>개인정보 관리</h1>
-            <button onclick="location.href='mypage_modify.html'">개인정보 수정</button>
+            <h1>개인정보 수정</h1>
+            <button onclick="saveChanges()">저장</button>
         </div>
 
         <!-- 정보 그리드 -->
         <div class="info-grid">
-            <div class="info-box">
-                <label>이름</label>
-                <span>정현수</span>
-            </div>
-            <div class="info-box">
-                <label>전화번호</label>
-                <span>010-1234-5678</span>
-            </div>
-            <div class="info-box">
+            <div class="info-box" onclick="enableEdit(this)">
                 <label>이메일</label>
                 <span>example@example.com</span>
+                <input type="text" value="example@example.com">
             </div>
-            <div class="info-box">
+            <div class="info-box" onclick="enableEdit(this)">
                 <label>직업</label>
                 <span>데이터 분석가</span>
+                <input type="text" value="데이터 분석가">
             </div>
-            <div class="info-box">
+            <div class="info-box" onclick="enableEdit(this)">
                 <label>관심분야</label>
                 <span>AI, 머신러닝</span>
+                <input type="text" value="AI, 머신러닝">
             </div>
-            <div class="info-box">
+            <div class="info-box" onclick="enableEditDropdown(this)">
                 <label>마케팅 정보 수신</label>
                 <span>미동의</span>
+                <select>
+                    <option value="동의">동의</option>
+                    <option value="미동의" selected>미동의</option>
+                </select>
             </div>
         </div>
 
         <!-- 푸터 -->
         <div class="footer">
-            <a href="#" onclick="alert('회원 탈퇴 페이지로 이동')">회원 탈퇴</a>
+            <a href="#" onclick="alert('수정을 취소하고 이전 페이지로 돌아갑니다.')">뒤로가기</a>
         </div>
     </div>
+
+    <script>
+        function enableEdit(box) {
+            box.classList.add('editable');
+            const input = box.querySelector('input');
+            input.focus();
+        }
+
+        function enableEditDropdown(box) {
+            box.classList.add('editable');
+            const select = box.querySelector('select');
+            select.focus();
+        }
+
+        function saveChanges() {
+            const editableBoxes = document.querySelectorAll('.info-box.editable');
+            editableBoxes.forEach(box => {
+                const input = box.querySelector('input');
+                const select = box.querySelector('select');
+                const span = box.querySelector('span');
+
+                if (input) {
+                    span.textContent = input.value; // input 값을 span으로 저장
+                }
+
+                if (select) {
+                    span.textContent = select.value; // select 값을 span으로 저장
+                }
+
+                box.classList.remove('editable'); // 수정 종료
+            });
+
+            alert('변경 사항이 저장되었습니다!');
+            // 수정된 정보를 저장하고 mypage.html로 이동
+            window.location.href = 'mypage.html';
+        }
+    </script>
 </body>
 </html>
