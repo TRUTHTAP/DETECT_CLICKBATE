@@ -6,7 +6,6 @@
     <title>Truth Tap</title>
     <style>
         body {
-            background-image: url('ai.PNG'); /* 배경 이미지 경로 */
             background-size: cover;
             background-position: center;
             position: relative;
@@ -14,7 +13,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            background-color: #fff9ea; /* 그라데이션 효과 제거하고 단색 배경으로 수정 */
+            background-color: #cde6ff; /* 단색 배경 */
             height: 100%;
             overflow: hidden;
         }
@@ -28,22 +27,29 @@
         header h1 {
             margin: 0;
             font-size: 2.5rem;
-            color: #fffcf9;
+            color: #0b1e5e;
         }
 
         .mypage-link {
             position: absolute;
             top: 20px;
             right: 20px;
-            font-size: 1rem;
-            color: #007bff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #fafcff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             cursor: pointer;
-            text-decoration: underline;
         }
 
-        .mypage-link:hover {
-            color: #0056b3;
+        .mypage-link img {
+            width: 24px;
+            height: 24px;
         }
+
+        
 
         main {
             display: flex;
@@ -155,7 +161,9 @@
 <body>
     <header>
         <h1>Truth Tap</h1>
-        <div class="mypage-link" onclick="location.href='mypage.html'">마이페이지</div>
+        <div class="mypage-link" onclick="location.href='mypage.html'">
+            <img src="user-icon.png" alt="마이페이지">
+        </div>
     </header>
     <main>
         <div class="input-section">
@@ -165,7 +173,6 @@
         <div class="score-section">
             <div id="credibilityScore" class="score">Credibility Score: 0%</div>
         </div>
-        <!-- 요약 내용 보기와 추천 기사 보러가기를 같은 줄에 배치 -->
         <div class="action-row">
             <div class="summary" onclick="toggleSummary()">요약 내용 보기 ▼</div>
             <div class="recommendation" onclick="window.open('detect-recommend.html', '_blank')">추천기사 보러가기</div>
