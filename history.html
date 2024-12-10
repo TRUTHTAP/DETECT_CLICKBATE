@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History</title>
+    <style>
+        /* 기본 스타일 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            background-color: #cde6ff; /* 배경색 추가 */
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-direction: column;
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+        }
+
+        /* Truth Tap 로고 */
+        .logo {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .logo h1 {
+            font-size: 2.5rem;
+            color: #0b1e5e;
+            cursor: pointer;
+            text-decoration: none; /* 기본 밑줄 제거 */
+        }
+
+        .logo h1:hover {
+            text-decoration: none; /* 마우스 올려도 밑줄 제거 */
+        }
+
+        /* 컨테이너 */
+        .container {
+            width: 95%; /* 가로 너비를 약간 늘림 */
+            max-width: 1300px; /* 최대 너비도 약간 확장 */
+            background: rgba(255, 255, 255, 0.9); /* 중앙 박스 반투명 배경 */
+            border-radius: 15px; /* 둥근 모서리 */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+            padding: 30px;
+            overflow-y: scroll; /* 스크롤 활성화 */
+            max-height: 80vh; /* 화면 높이를 초과하지 않도록 제한 */
+            margin-top: 40px; /* Truth Tap 로고 아래로 */
+        }
+
+        h1 {
+            text-align: center;
+            color: #0b1e5e;
+            margin-bottom: 20px;
+        }
+
+        .history {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .history-item {
+            display: flex;
+            align-items: center;
+            background-color: #f8faff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .history-item img {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+
+        .history-item .details {
+            flex: 1;
+        }
+
+        .history-item h3 {
+            font-size: 1rem;
+            margin: 0 0 5px;
+            color: #333;
+        }
+
+        .history-item p {
+            font-size: 0.9rem;
+            color: #555;
+            margin: 0;
+        }
+
+        .history-item button {
+            background-color: #4b81ba;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .history-item button:hover {
+            background-color: #3a6d9a;
+        }
+    </style>
+</head>
+<body>
+    <!-- Truth Tap 로고 -->
+    <div class="logo">
+        <h1 onclick="location.href='main.html'">Truth Tap</h1>
+    </div>
+
+    <div class="container">
+        <h1>History</h1>
+        <div class="history" id="history">
+            <!-- 스크롤 가능한 기사 목록 -->
+            <div class="history-item">
+                <img src="https://via.placeholder.com/80" alt="기사 이미지">
+                <div class="details">
+                    <h3>기사 제목 1</h3>
+                    <p>이 기사는 입력된 URL에 대한 간략한 설명을 담고 있습니다.</p>
+                </div>
+                <button onclick="alert('기사 링크로 이동')">보기</button>
+            </div>
+            <div class="history-item">
+                <img src="https://via.placeholder.com/80" alt="기사 이미지">
+                <div class="details">
+                    <h3>기사 제목 2</h3>
+                    <p>이 기사는 입력된 URL에 대한 간략한 설명을 담고 있습니다.</p>
+                </div>
+                <button onclick="alert('기사 링크로 이동')">보기</button>
+            </div>
+            <div class="history-item">
+                <img src="https://via.placeholder.com/80" alt="기사 이미지">
+                <div class="details">
+                    <h3>기사 제목 3</h3>
+                    <p>이 기사는 입력된 URL에 대한 간략한 설명을 담고 있습니다.</p>
+                </div>
+                <button onclick="alert('기사 링크로 이동')">보기</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 기사 데이터를 추가하는 함수 (예제)
+        function loadMoreArticles() {
+            const history = document.getElementById('history');
+
+            for (let i = 4; i <= 10; i++) {
+                const item = document.createElement('div');
+                item.className = 'history-item';
+                item.innerHTML = `
+                    <img src="https://via.placeholder.com/80" alt="기사 이미지">
+                    <div class="details">
+                        <h3>기사 제목 ${i}</h3>
+                        <p>이 기사는 입력된 URL에 대한 간략한 설명을 담고 있습니다.</p>
+                    </div>
+                    <button onclick="alert('기사 링크로 이동')">보기</button>
+                `;
+                history.appendChild(item);
+            }
+        }
+
+        // 페이지가 로드될 때 오래된 기사 추가
+        window.onload = function () {
+            loadMoreArticles();
+        };
+    </script>
+</body>
+</html>
